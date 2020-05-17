@@ -8,6 +8,7 @@ namespace Race
 {
     class Unicorn : Animal
     {
+      //en konstruktor, så den får allt när den skapar
       public Unicorn()
       {
             speed = 10;

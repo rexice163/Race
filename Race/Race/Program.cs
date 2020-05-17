@@ -14,6 +14,7 @@ namespace Race
 
             int round = 0;
 
+            //en lista där djuren kommer sättas in
             List<Animal> aniList = new List<Animal>();
             while (true)
             {
@@ -23,6 +24,7 @@ namespace Race
 
                 bool success = int.TryParse(answer, out int answer2);
 
+                //if-sats till att slumpa fram vilken djur som ska skapas och hur många som ska skapas
                 if (success && answer2 > 0)
                 {
                     for (int i = 0; i < answer2; i++)
@@ -51,6 +53,7 @@ namespace Race
 
                     break;
                 }
+                //personer skrev en siffra men den var inte över 0
                 else if (success)
                 {
                     Console.WriteLine("Something above 0");
@@ -61,60 +64,62 @@ namespace Race
                 }
 
                 Console.Clear();
+            }
+            //slumpa fram en av djuren i listan
+            Animal priAnimal = aniList[generator.Next(aniList.Count)];
+            //en av djuren blir main fokus
+            Console.WriteLine("The chosen animal is");
+            Console.WriteLine(priAnimal.player);
 
+            Console.WriteLine("Press any key to start the race!");
 
-                Animal priAnimal = aniList[generator.Next(aniList.Count)];
+            Console.ReadKey();
+            Console.Clear();
 
-                Console.WriteLine("The chosen animal is");
-                Console.WriteLine(priAnimal.player);
-
-                Console.WriteLine("Press any key to start the race!");
-
-                Console.ReadKey();
-                Console.Clear();
+            while (true)
+            {
+                //racet startar
+                Console.WriteLine("Round: " + round);
+                priAnimal.PrintStats();
+                Console.WriteLine("________________________________________");
 
                 while (true)
                 {
-                    Console.WriteLine("Round: " + round);
-                    priAnimal.PrintStats();
-                    Console.WriteLine("________________________________________");
+                    //personer får välja om den vill vila eller röra på sig
+                    Console.WriteLine("Choose an option.");
+                    Console.WriteLine("1 = Move, 2 = Rest");
 
-                    while (true)
+                    string answer3 = Console.ReadLine();
+
+                    int.TryParse(answer3, out int answer4);
+                    if (answer4 == 1)
                     {
-                        Console.WriteLine("Choose an option.");
-                        Console.WriteLine("1 = Move, 2 = Rest");
-
-                        string answer3 = Console.ReadLine();
-
-                        int.TryParse(answer3, out int answer4);
-                        if (answer4 == 1)
-                        {
-                            priAnimal.Move();
-                            break;
-                        }
-                        else if (answer4 == 2)
-                        {
-                            priAnimal.Rest();
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("mate, 1 or 2");
-                        }
+                        priAnimal.Move();
+                        break;
                     }
-                    if (priAnimal.position == 20)
+                    else if (answer4 == 2)
                     {
-                        Console.WriteLine("Congratulations! It's over");
-                        Console.ReadKey();
+                        priAnimal.Rest();
                         break;
                     }
                     else
                     {
-                        round++;
+                        Console.WriteLine("mate, 1 or 2");
                     }
-
-                    Console.Clear();
                 }
+                //när den når eller kommer nå position 20, då avslutas den
+                if (priAnimal.position > 20)
+                {
+                    Console.WriteLine("Congratulations! It's over");
+                    Console.ReadKey();
+                    break;
+                }
+                else
+                {
+                    round++;
+                }
+
+                Console.Clear();
             }
         }
     }
