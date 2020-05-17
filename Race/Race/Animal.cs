@@ -12,16 +12,17 @@ namespace Race
         public int position = 0;
         public int energyCurrent;
         public int energyMax;
+        public string player;
 
         static Random generator = new Random();
 
-        void Move()
+        public void Move()
         {
             if(energyCurrent > 0)
             {
-                position = position + generator.Next(speed);
+                position += generator.Next(speed);
 
-                energyCurrent =- 1;
+                energyCurrent--;
             }
             else
             {
@@ -29,14 +30,14 @@ namespace Race
             }
         }
 
-        void Rest()
+        public void Rest()
         {
             energyCurrent = energyMax;
         }
 
-        void PrintStats()
+        public void PrintStats()
         {
-
+            Console.WriteLine("Speed: " + speed + "\nPosition: " + position + "\nEnergy: " + energyCurrent + "/" + energyMax);
         }
     }
 }

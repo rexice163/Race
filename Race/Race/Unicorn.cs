@@ -13,6 +13,7 @@ namespace Race
             speed = 10;
             energyCurrent = 10;
             energyMax = 10;
+            player = "Unicorn";
       }
     }
 }

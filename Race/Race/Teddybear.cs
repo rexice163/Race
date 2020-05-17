@@ -13,6 +13,7 @@ namespace Race
             speed = 5;
             energyCurrent = 5;
             energyMax = 5;
+            player = "Teddybear";
         }
 
     }
